@@ -1,0 +1,134 @@
+package task_2;
+
+
+
+import task_1.MyDate;
+
+public class Person 
+{
+
+	String name,address,phone_number,email;
+
+	public Person(String name, String address, String phone_number, String email) 
+	{
+		this.name =name;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.email = email;
+	}
+	
+	
+	public Person() 
+	{
+		this("Margarita Selenko", "Address", "PhoneNumber", "Email");
+	}
+	
+
+	
+	public String toString() 
+	{
+		return "Person name is " + this.name + " and class name is " + this.getClass().getSimpleName();
+	}
+	
+	public String getName() 
+	{
+		return this.name;
+	} 
+	
+}
+
+
+class Student extends Person
+{
+	final String STATUS;
+	
+	
+	public Student(String status) 
+	{
+		super();
+		this.STATUS = status;
+	}
+	
+	public String toString() 
+	{
+		return super.toString();
+	}
+}
+
+
+
+class Employee extends Person
+{
+
+	String office;
+	long salary;
+	MyDate hiredate;
+	
+	public Employee() 
+	{
+		super();
+	}
+	public Employee(String office, long salary, MyDate hiredate) 
+	{
+		super();
+		this.office = office;
+		this.salary = salary;
+		this.hiredate = hiredate;
+		
+	}
+	public String toString() 
+	{
+		return super.toString();
+	}	
+}
+
+
+
+class Faculty extends Employee
+{
+	private String house, rank;
+	
+	public Faculty(String house, String rank) 
+	{
+		super();
+		this.house = house;
+		this.rank = rank;
+	}
+	
+	public String toString() 
+	{
+		return super.toString();
+	}
+	
+} 
+
+class Staff extends Employee
+{
+	private String title;
+	
+	public Staff(String title) 
+	{
+		super();
+		this.title = title;
+	}
+	
+	public String toString() 
+	{
+		return super.toString();
+	}
+	
+}
+
+class Main
+{
+	public static void main(String[] args) 
+	{
+		Person person = new Person();
+		Student student = new Student("freshman");
+		Employee employee = new Employee();
+		System.out.println(person);
+		System.out.println(student);
+		System.out.println(employee);
+
+	}
+}

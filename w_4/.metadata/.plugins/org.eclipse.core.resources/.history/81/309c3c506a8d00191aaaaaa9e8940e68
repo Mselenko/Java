@@ -1,0 +1,51 @@
+package task_2;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+public class Tester {
+
+	final static String filename = "wordsGenerated.txt";
+
+	public static void main(String[] args) {
+		
+		System.out.println("##########################Task 2##########################\n");
+
+		char letters[][] = { { '0', '0', '0' }, { '1', '1', '1' }, { 'A', 'B', 'C' }, { 'D', 'E', 'F' },
+				{ 'G', 'H', 'I' }, { 'J', 'K', 'L' }, { 'M', 'N', 'O' }, { 'P', 'R', 'S' }, { 'T', 'U', 'V' },
+				{ 'W', 'X', 'Y' } };
+
+		String phoneNumber;
+
+		try (OutputStreamWriter stream = new OutputStreamWriter(new FileOutputStream(filename));
+			 Scanner input = new Scanner(System.in);) 
+		{
+			do 
+			{
+				System.out.print("Please enter a 7-digit telephone number (avoid 0s and 1s in the number): ");
+				phoneNumber = input.next();
+
+			} while (!(phoneNumber.matches("[0-9]+") && phoneNumber.length() == 7));
+
+			PhoneNumberGenerator generator = new PhoneNumberGenerator(letters, phoneNumber);
+
+			generator.generateWords(stream);
+			
+
+		} catch (FileNotFoundException e) {
+			System.out.println("\nSystem cannot find this file");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("\nInput/Output Exception occures");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Exception occures: ");
+			e.printStackTrace();
+		}
+		
+		System.out.println("Output has been written in the file");
+	}
+}

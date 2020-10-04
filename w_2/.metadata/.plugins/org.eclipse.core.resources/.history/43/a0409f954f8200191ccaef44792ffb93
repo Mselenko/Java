@@ -1,0 +1,20 @@
+package task_2;
+
+public class Student extends Person
+{
+	
+		final String STATUS;
+		
+		public Student(String status2) 
+		{
+			super();
+			this.STATUS = status2;
+		}
+
+		public String toString() 
+		{
+			return super.toString();
+		}
+
+
+}

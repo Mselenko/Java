@@ -1,0 +1,34 @@
+package for_flynn_test;
+
+public class main {
+	public static void main(String args[]) {
+		String sentence = "Codility We test coders";
+		int k = 100;
+		
+		solution(sentence, k);
+	}
+	
+	public static String solution(String message, int k) {
+		if(message.length() <= k) {
+			return message;
+		}
+		
+		String croppedMessage = "";
+		char characters[] = message.substring(0, k + 1).toCharArray();
+
+		if(message.charAt(k + 1) != ' ') {
+			for(int i = k; i >= 0; i--) {
+				if(characters[i] == ' ') {
+					break;
+				}
+				else {
+					characters[i] = ' ';
+				}
+			}
+		}
+		
+		croppedMessage = new String(characters).trim();
+		
+		return croppedMessage;
+	}
+}

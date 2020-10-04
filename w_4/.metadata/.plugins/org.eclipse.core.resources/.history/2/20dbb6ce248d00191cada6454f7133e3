@@ -1,0 +1,67 @@
+package task_2;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Scanner;
+
+
+public class Tester {
+	
+	
+	
+	//private static ObjectOutputStream output; 
+	
+	final static String filename = "wordsGenerated.txt";
+	
+	public static void main(String[] args)
+	{
+		
+		char letters[][] = {
+			{'0','0','0'},{'1','1','1'},{'A','B','C'},
+			{'D','E','F'},{'G','H','I'},{'J','K','L'},
+			{'M','N','O'},{'P','R','S'},{'T','U','V'},
+			{'W','X','Y'}};
+		
+		
+		
+
+		
+		try(PrintStream printStream = new PrintStream (new ObjectOutputStream(new FileOutputStream(filename)));
+			Scanner input = new Scanner(System.in);)
+		{
+			System.out.print("Please enter a 7-digit telephone number (avoid 0s and 1s in the number): ");
+			String phoneNumber = input.next();
+			
+			
+			
+			PhoneNumberGenerator generator = new PhoneNumberGenerator(letters,phoneNumber); 
+			
+			generator.generateWords(printStream);
+			
+		}
+		
+		
+
+		
+		
+		
+		catch(IOException e)
+		{
+			System.err.println("Error opening output file.");
+		}
+	
+		catch(Exception e)
+	    {
+	    	System.err.println("Error Writing to File");
+	    }
+		
+	
+
+        System.out.println("\nResult has been written into the file.");
+		}
+	
+
+}

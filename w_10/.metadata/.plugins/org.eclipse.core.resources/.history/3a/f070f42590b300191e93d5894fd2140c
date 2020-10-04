@@ -1,0 +1,135 @@
+package server;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.NoSuchElementException;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
+
+public class Server extends Application {
+
+	private ServerSocket serverSocket;
+	private TextArea ta = new TextArea();
+	private String message;
+	private ArrayList<NewClient> clients = new ArrayList<>();
+	boolean isNameSet = true;
+
+	@Override
+	public void start(Stage primaryStage) 
+	{
+		ta.appendText("MultiThreadServer started at " + new Date() + "\n\n");
+		ta.setEditable(false);
+
+		ScrollPane mainPane = new ScrollPane(ta);
+		mainPane.setFitToHeight(true);
+		mainPane.setPadding(new Insets(5, 5, 5, 5));
+
+		Scene scene = new Scene(mainPane, 500, 300);
+		primaryStage.setTitle("Multi-threaded Server");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+
+		new Thread(() -> {
+			try {
+				serverSocket = new ServerSocket(8000);
+
+				while (true) 
+				{
+					Socket socket = serverSocket.accept();
+					String clientName = "Client " + (clients.size() + 1) + ": ";
+					NewClient newClient = new NewClient(clientName, socket);
+					clients.add(newClient);
+				}
+
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}).start();
+	}
+
+	public void broadcastMessage(String fromClientName, String message) throws IOException 
+	{
+
+		for (NewClient newClient : clients) 
+		{
+			newClient.output.writeUTF(fromClientName + " :" + message + "\n\n");
+			newClient.output.flush();
+		}
+
+		Platform.runLater(() -> {
+			ta.appendText(fromClientName +  message);
+		});
+
+	}
+
+	class NewClient implements Runnable 
+	{
+		private Socket socket;
+		private DataInputStream input;
+		private DataOutputStream output;
+		private String name = "";
+
+		public NewClient(String name, Socket socket) 
+		{
+			this.socket = socket;
+			this.name = name;
+			Thread thread = new Thread(this);
+			thread.start();
+		}
+
+		public void run() {
+			try {
+				input = new DataInputStream(socket.getInputStream());
+				output = new DataOutputStream(socket.getOutputStream());
+
+				ta.appendText("Connection from " + socket + " at " + new Date() + "\n");
+
+				while (true) {
+					
+					
+					if (isNameSet) {
+						message = input.readUTF();
+						this.name = message.trim();
+						isNameSet = false;
+					}
+					else {
+						
+						message = input.readUTF();
+						broadcastMessage(name, message);			
+					}					
+				}
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+	}
+
+	
+	public static void main(String[] args) 
+	{
+		launch(args);
+	}
+
+	public void showMessage(String message) {
+
+		Platform.runLater(() -> {
+			ta.appendText(message);
+
+		});
+	}
+
+}

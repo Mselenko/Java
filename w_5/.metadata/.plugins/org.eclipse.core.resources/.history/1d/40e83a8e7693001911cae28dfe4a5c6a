@@ -1,0 +1,72 @@
+package task_1;
+	
+import javafx.application.Application; 
+import javafx.scene.Group; 
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage; 
+import javafx.scene.shape.Rectangle;
+ 
+public class Main extends Application {
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+      
+    	
+    	
+    	stage.setTitle("Chess Board"); 
+    	Group root = new Group();
+    	Scene scene = new Scene(root, 600, 600);  
+    	
+    	Group g = new Group();
+    	
+    	int y;
+    	
+    	for(int j = 0; j<8; j++) 
+    	{
+    		
+    	if ((j+1) % 2 == 0 ) {
+    		y = 0;
+    		
+    	}	 
+    		
+    	for (int i = 1; i < 9; i++) {
+    		Rectangle rectangle = new Rectangle();
+    		rectangle.setX(75 * j);
+    		
+    		rectangle.setY(i * 75); 
+//            //rectangle.setX(0.0f); 
+//            rectangle.setWidth(75.0f); 
+//            rectangle.setHeight(75.0f);  
+//            rectangle.setFill(Color.AQUA);
+    		if(i % 2 != 0) {
+    			
+    		//rectangle.setX(75 * j);
+    		rectangle.setY(i * 75);
+    		}else {
+//    			rectangle.setY(75 * j);
+//        		rectangle.setX((i+1) * 75);
+    		}
+    		
+    		rectangle.setWidth(75);
+    		rectangle.setHeight(75);
+            g.getChildren().add(rectangle);
+    		
+    		
+    		
+    	}
+    	
+    	}
+    	  
+    	 root.getChildren().add(g);
+         
+          stage.setScene(scene); 
+             
+          stage.show(); 
+    	
+    }
+    
+ public static void main(String[] args) {
+        launch(args);
+    }
+}

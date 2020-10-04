@@ -1,0 +1,17 @@
+package task_2;
+
+public class Garbage {
+
+	
+	 public static void main (String[] args)
+	  {
+		 String[][] pattern = new String[6][7];
+		 
+		 for(int i =0; i < pattern.length; i++) {
+			 for(int  j=0; j < pattern[i].length; i++) 
+			 {
+				System.out.print("|"); 
+			 }
+		 }
+	  }
+}

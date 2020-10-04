@@ -1,0 +1,166 @@
+package task_2;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+
+public class ButtonMethods {
+	
+	final int FNAME = 20; 
+	final int LNAME = 20; 
+	final int CITY = 20; 
+	final int PROVINCE = 4; 
+	final int POSTAL = 5; 
+	protected int count = 1;
+	NewPanel pane; 
+
+	
+	public ButtonMethods(NewPanel pane) 
+	{
+		this.pane =pane;
+		
+	}
+	
+	public void add() {
+		try (RandomAccessFile inout = new RandomAccessFile("AddressBook.dat", "rw")) 
+		{
+				inout.seek(inout.length());
+			 	write(inout);
+			 	count++;
+			}
+			catch (FileNotFoundException ex) {}
+			catch (IOException ex) {}
+			catch (IndexOutOfBoundsException ex) {}
+		}
+		
+	
+	
+	public void first() {
+		
+		try (RandomAccessFile inout = new RandomAccessFile("AddressBook.dat", "rw")) 
+		{
+				if (inout.length() > 0) {
+					inout.seek(0);
+					read(inout);
+					System.out.println("Reading address #0");
+					count = 1;
+				}
+				else {
+					System.out.println("Address is empty!");
+				}
+			}
+			catch (IOException ex) {}
+	}
+	
+	
+	public void next() {
+
+		try ( // Create a random access file
+				RandomAccessFile inout = 
+					new RandomAccessFile("AddressBook.dat", "rw");
+			) {
+				if (count * 69 < inout.length()) {
+					inout.seek(count * 69);
+					read(inout);
+					count++;
+					System.out.println("Reading address #" + count);
+				}
+				else {
+					System.out.println("End of file!");
+				}
+			}
+			catch (IOException ex) {}
+	}
+	
+	
+	public void previous() {
+		try ( // Create a random access file
+				RandomAccessFile inout = 
+					new RandomAccessFile("AddressBook.dat", "rw");
+			) {
+				if (count > 1) 
+					count--;
+				else
+					count = 1;
+				inout.seek((count * 69) - 69);
+				read(inout);
+				System.out.println("Reading address #" + count);
+			}
+			catch (IOException ex) {}
+		
+	}
+	
+	public void last() {
+		try ( // Create a random access file
+				RandomAccessFile inout = 
+					new RandomAccessFile("AddressBook.dat", "rw");
+			) {
+				count = ((int)inout.length()) / 69;
+				inout.seek((count * 69) - 69);
+				read(inout);
+				System.out.println("Reading address #" + count);
+			}
+			catch (IOException ex) {}
+		
+	}
+	
+	public void update() {
+		System.out.println("Add Button is Clicked");
+		
+		try ( // Create a random access file
+				RandomAccessFile inout = 
+					new RandomAccessFile("AddressBook.dat", "rw");
+			) {
+			 	inout.seek(count * 69 - 69);
+			 	write(inout);
+			}
+			catch (FileNotFoundException ex) {}
+			catch (IOException ex) {}
+		
+	}
+	
+	
+	private void write(RandomAccessFile inout) throws IOException {
+		System.out.println(pane.province.getValue());
+		inout.write(fixedLength(pane.firstName.getText().getBytes(), FNAME)); 
+		inout.write(fixedLength(pane.lastName.getText().getBytes(), LNAME)); 
+		inout.write(fixedLength(pane.city.getText().getBytes(), CITY));
+		inout.write(fixedLength(pane.province.getValue().getBytes(), PROVINCE));
+		inout.write(fixedLength(pane.postalCode.getText().getBytes(), POSTAL));
+		System.out.println("Address #" + count + " saved!");
+	}
+
+	private byte[] fixedLength(byte[] x, int n) {
+		byte[] b = new byte[n];
+		for (int i = 0; i < x.length; i++) {
+			b[i] = x[i];
+		}
+		return b;
+	}
+	
+	
+	private void read(RandomAccessFile inout) throws IOException {
+		int pos;
+		
+		byte[] fname = new byte[FNAME];	
+		pos = inout.read(fname);
+		pane.firstName.setText(new String(fname));
+		
+		byte[] lname = new byte[FNAME];	
+		pos += inout.read(lname);
+		pane.lastName.setText(new String(lname));
+
+		byte[] city = new byte[CITY];	
+		pos += inout.read(city);
+		pane.city.setText(new String(city));
+
+		byte[] province = new byte[PROVINCE];	
+		pos += inout.read(province);
+		pane.province.setPromptText(new String(province));
+
+		byte[] postal = new byte[POSTAL];	
+		pos += inout.read(postal);
+		pane.postalCode.setText(new String(postal));
+	}
+}

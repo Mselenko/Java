@@ -1,0 +1,9 @@
+.text-field{
+    -fx-min-width: 200;
+    
+}
+
+
+.button {
+    -fx-pref-width: 200px;
+}

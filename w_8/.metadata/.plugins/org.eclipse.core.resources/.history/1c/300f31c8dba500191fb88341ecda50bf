@@ -1,0 +1,24 @@
+package task_1;
+
+import javafx.scene.control.TextField;
+
+public class Calculation {
+
+	private int  addition, substraction, multiplication;
+	private double division;
+	
+	
+	Calculation()
+	{
+		addition =0;
+		substraction =0;
+		multiplication =0;
+		division =0.0;
+	}
+	
+	
+	public void submit(String addition, String substraction, String multiplication, String division) 
+	{
+		System.out.println(addition + substraction + multiplication + division);
+	}
+}

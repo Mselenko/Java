@@ -1,0 +1,40 @@
+package task_1;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Tester {
+	
+	public static void main(String [] argv) {
+		
+		System.out.println("##########################Task 1##########################\n");
+		System.out.print("Enter a filename: ");
+		Scanner input = new Scanner(System.in);
+		
+		
+		try(FileInputStream file = new FileInputStream(new File(input.next()))
+		{
+//			for (int i = 0; i !=-1; i++) 
+//			{
+//				System.out.println(file.available());
+//				System.out.println((char)file.read());
+//			}
+			
+			int byteRead; 
+			while ((byteRead = file.read()) != -1) {
+				 // Read byte-by-byte from buffer
+				System.out.println((char)byteRead);
+			} 
+			
+		}catch(IOException e) 
+		{
+			System.out.println("\nSystem cannot find this file");
+		}
+		
+		
+		
+	}
+
+}

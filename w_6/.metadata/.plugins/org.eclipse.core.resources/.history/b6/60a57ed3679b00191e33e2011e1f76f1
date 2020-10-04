@@ -1,0 +1,195 @@
+package task_1;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class ATMPanel extends Application {
+
+//	@Override
+//	public void start(Stage primaryStage)
+//	{
+//		
+//		FlowPane flowPane = new FlowPane(5, 5);
+//		
+//		TextField accountNumber = new TextField();
+//		
+//		accountNumber.setPrefColumnCount(20);
+//		
+//		
+//		flowPane.setPadding(new Insets(5));
+//		flowPane.setVgap(30);
+//		flowPane.getChildren().addAll(new Label("First Name: "), accountNumber);
+//		Button newWindow_btn = new Button();
+//		newWindow_btn.setText("Submit");
+//		
+//		
+//		//setCenter(flowPane);
+//		
+//		newWindow_btn.setOnAction( new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				// TODO Auto-generated method stub
+//				Label myLabel = new Label("I am second Window");
+//				
+//				StackPane secondPane = new StackPane();
+//				secondPane.getChildren().add(myLabel);
+//				
+//				Scene secondScene = new Scene(secondPane,200,200);
+//				
+//				Stage secondStage = new Stage();
+//				secondStage.setTitle("New Window");
+//				secondStage.setScene(secondScene);
+//				
+//				secondStage.show();
+//				
+//			}
+//			
+//			
+//		});
+//		
+//		//StackPane root = new StackPane();
+//		flowPane.getChildren().add(newWindow_btn);
+//	
+//		Scene rootScene = new Scene(flowPane, 400,200);
+//		primaryStage.setTitle("ATM");
+//        primaryStage.setScene(rootScene);
+//        primaryStage.show();
+
+	@Override
+	public void start(Stage stage) {
+		
+		Text text1 = new Text("Enter an Account Number : ");
+		Text text2 = new Text("Enter a PIN : ");
+
+	
+		TextField textField1 = new TextField();
+		textField1.setPrefColumnCount(20);
+		TextField textField2 = new TextField();
+
+		Button button1 = new Button("Submit");
+		Button button2 = new Button("Create new PIN ");
+		button1.setMaxWidth(100);
+
+//		      button2.setOnAction( new EventHandler<ActionEvent>() {
+//				   
+//		   			@Override
+//		   			public void handle(ActionEvent event) {
+//		   				// TODO Auto-generated method stub
+//		   				Label myLabel = new Label("I am second Window");
+//		   				
+//		   				StackPane secondPane = new StackPane();
+//		   				secondPane.getChildren().add(myLabel);
+//		   				
+//		   				Scene secondScene = new Scene(secondPane,200,200);
+//		   				
+//		   				Stage secondStage = new Stage();
+//		   				secondStage.setTitle("New Window");
+//		   				secondStage.setScene(secondScene);
+//		   				
+//		   				secondStage.show();h
+//		   				
+		// }
+
+		button1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+
+				Text text2 = new Text("Enter a PIN : ");
+
+				TextField textField1 = new TextField();
+				textField1.setPrefColumnCount(20);
+
+				Button button2 = new Button("Submit");
+				//button2.setMaxWidth(100);
+
+				button2.setOnAction(new EventHandler<ActionEvent>() 
+				{
+					@Override
+					public void handle(ActionEvent event) 
+					{
+						System.out.println("ss");
+					}
+				});
+
+				GridPane gridPane = new GridPane();
+
+				gridPane.setMinSize(600, 300);
+				gridPane.setPadding(new Insets(10, 10, 10, 10));
+
+				gridPane.setVgap(5);
+				gridPane.setHgap(5);
+
+				// Setting the Grid alignment
+				gridPane.setAlignment(Pos.CENTER);
+
+				// Arranging all the nodes in the grid
+				gridPane.add(text2, 0, 0);
+				gridPane.add(textField1, 1, 0);
+				gridPane.add(button2, 1, 6);
+
+				// Creating a scene object
+
+				Scene secondScene = new Scene(gridPane);
+
+				Stage secondStage = new Stage();
+				secondStage.setTitle("ATM");
+				secondStage.setScene(secondScene);
+
+				secondStage.show();
+			}
+		});
+
+		// Creating a Grid Pane
+		GridPane gridPane = new GridPane();
+
+		// Setting size for the pane
+		gridPane.setMinSize(600, 300);
+
+		// Setting the padding
+		gridPane.setPadding(new Insets(10, 10, 10, 10));
+
+		// Setting the vertical and horizontal gaps between the columns
+		gridPane.setVgap(5);
+		gridPane.setHgap(5);
+
+		// Setting the Grid alignment
+		gridPane.setAlignment(Pos.CENTER);
+
+		// Arranging all the nodes in the grid
+		gridPane.add(text1, 0, 0);
+		gridPane.add(textField1, 1, 0);
+		gridPane.add(text2, 0, 1);
+		gridPane.add(textField2, 1, 1);
+		gridPane.add(button1, 1, 6);
+		gridPane.add(button2, 2, 6);
+
+		// Creating a scene object
+		Scene scene = new Scene(gridPane);
+
+		// Setting title to the Stage
+		stage.setTitle("ATM");
+
+		// Adding scene to the stage
+		stage.setScene(scene);
+
+		// Displaying the contents of the stage
+		stage.show();
+	}
+
+	public static void main(String args[]) {
+		launch(args);
+	}
+}

@@ -1,0 +1,23 @@
+package task_2;
+
+public class GameMethods {
+	
+	public static String[][] drawGame()
+	  {
+	     String[][] pattern = new String[6][15]; 
+	     
+	    for (int i =0;i<pattern.length;i++)
+	    {
+	        //Creation of the columns for each row
+	       for (int j =0;j<pattern[i].length;j++)
+	      {
+	        if (j% 2 == 0) pattern[i][j] ="|"; // even columns have | symbol , odd columns have " "
+	        else pattern[i][j] = " ";
+	                
+	        if (i==6) pattern[i][j]= "-"; // last row that contains only horizontal line
+	      }
+	      
+	    }
+	    return pattern;
+	  }
+}

@@ -1,0 +1,13 @@
+package task_1;
+
+public class Triangle extends GeometricObject 
+{
+	private double side1,side2,side3;
+	
+	Triangle()
+	{
+		side1,side2,side3 = 0.0;
+	}
+	area perimeter
+
+}

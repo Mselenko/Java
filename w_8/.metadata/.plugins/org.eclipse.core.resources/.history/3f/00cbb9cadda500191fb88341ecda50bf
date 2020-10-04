@@ -1,0 +1,43 @@
+package task_1;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
+
+public class Calculation {
+
+	private int  addition, substraction, multiplication;
+	private double division;
+	
+	
+	Calculation()
+	{
+		addition =0;
+		substraction =0;
+		multiplication =0;
+		division =0.0;
+	}
+	
+	
+	public void submit(String addition, String substraction, String multiplication, String division) 
+	{
+		if(validate(addition,substraction,multiplication,division)) 
+		{
+			System.out.println("Works");
+		}
+	}
+	
+	
+	public boolean validate(String addition, String substraction, String multiplication, String division) 
+	{
+		if(!(addition.matches("[0-9]+") && substraction.matches("[0-9]+") && multiplication.matches("[0-9]+") && division.matches("[0-9]+")))
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Please enter digits only");
+			alert.showAndWait();
+			return false;
+		}else {
+			return true;
+		}
+	}
+}

@@ -1,0 +1,24 @@
+package task_2;
+
+import task_1.MyDate;
+
+public class Tester 
+{
+
+	public static void main(String[] args) 
+	{
+		Person person = new Person();
+		Student student = new Student("freshman");
+		Employee employee = new Employee();
+		Faculty faculty = new Faculty("Monday-Friday", "6");
+		Staff staff = new Staff("Staff");
+		
+		System.out.println(person);
+		System.out.println(student);
+		System.out.println(employee);
+		System.out.println(faculty);
+		System.out.println(staff);
+		
+
+	}
+}

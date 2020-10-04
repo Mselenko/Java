@@ -1,0 +1,134 @@
+package garbage;
+
+import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.RadialGradientBuilder;
+import javafx.scene.paint.Stop;
+import javafx.stage.Stage;
+ 
+/**
+ * Created on: 23.06.2012
+ * @author Sebastian Damm
+ */
+public class CssExample extends Application{
+//{
+//    private final Paint background = RadialGradientBuilder.create()
+//            .stops(new Stop(0d, Color.TURQUOISE), new Stop(1, Color.web('3A5998')))
+//            .centerX(0.5d).centerY(0.5d).build();
+    private final String LABEL_STYLE = "-fx-text-fill: white; -fx-font-size: 14;"
+            + "-fx-effect: dropshadow(one-pass-box, black, 5, 0, 1, 1);";
+     
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+        Scene scene = new Scene(createGridPane(), 800, 300);
+        primaryStage.setTitle("GridPaneExample 2 - User form");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+     
+    private GridPane createGridPane()
+    {
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(5));
+        gridPane.setHgap(7); gridPane.setVgap(7);
+         
+        Label lbFirstName = new Label("First Name: ");
+        //lbFirstName.setStyle(LABEL_STYLE);
+        GridPane.setHalignment(lbFirstName, HPos.LEFT);
+        TextField tfFirstName = new TextField();
+        //tfFirstName.setPrefColumnCount(40);
+        GridPane.setColumnSpan(tfFirstName, 10);
+         
+        Label lbLastName = new Label("Last Name:");
+        //lbLastName.setStyle(LABEL_STYLE);
+        GridPane.setHalignment(lbLastName, HPos.LEFT);
+        TextField tfLastName = new TextField();
+       // tfLastName.setPrefColumnCount(40);
+        GridPane.setColumnSpan(tfLastName, 10);
+         
+//        Label lbCity = new Label("City:");
+//        //lbCity.setStyle(LABEL_STYLE);
+//        GridPane.setHalignment(lbCity, HPos.LEFT);
+//        TextField tfCity = new TextField();
+//        GridPane.setHalignment(tfCity, HPos.LEFT);
+//        GridPane.setColumnSpan(tfCity, 5);
+//         
+//        Label lbProvince = new Label("Province: ");
+//        
+//        //lbStreetNr.setStyle(LABEL_STYLE);
+//        GridPane.setHalignment(lbProvince, HPos.LEFT);
+//        ComboBox<String>  tfProvince = new ComboBox(); 
+//        GridPane.setHalignment(tfProvince, HPos.LEFT);
+//        
+//        Label lbpCode = new Label("Postal Code:");
+//        //lbCity.setStyle(LABEL_STYLE);
+//        GridPane.setHalignment(lbpCode, HPos.LEFT);
+//        TextField tfpCode = new TextField();
+//        
+//        
+        
+        Label lbCity = new Label("City");
+        
+        GridPane.setHalignment(lbCity, HPos.LEFT);
+        TextField tfCity = new TextField();
+       tfCity.setPrefColumnCount(6);
+        //GridPane.setColumnSpan(tfCity, 2);
+        
+Label lbProvince = new Label("Province");
+        
+        GridPane.setHalignment(lbProvince, HPos.LEFT);
+        TextField tfProvince = new TextField();
+        tfProvince.setPrefColumnCount(6);
+        
+Label lbpCode = new Label("Postal Code");
+        
+        GridPane.setHalignment(lbpCode, HPos.LEFT);
+        TextField tfpCode = new TextField();
+        tfpCode.setPrefColumnCount(6);
+        
+//        tfStreet.setPrefColumnCount(5);
+//        GridPane.setColumnSpan(tfStreet, 2);
+//        TextField tfNumber = new TextField();
+//        tfNumber.setPrefColumnCount(3);
+         
+//        Label lbNotes = new Label("Notes:");
+//        lbNotes.setStyle(LABEL_STYLE);
+//        GridPane.setHalignment(lbNotes, HPos.RIGHT);
+//        TextArea taNotes = new TextArea();
+//        taNotes.setPrefColumnCount(5);
+//        taNotes.setPrefRowCount(5);
+//        GridPane.setColumnSpan(taNotes, 3);
+//        GridPane.setRowSpan(taNotes, 2);    
+         
+
+         
+//        gridPane.setGridLinesVisible(true);
+         
+        gridPane.add(lbFirstName, 0, 0); gridPane.add(tfFirstName, 1, 0);
+        gridPane.add(lbLastName, 0, 1); gridPane.add(tfLastName, 1, 1);
+        
+        //gridPane.add(imageView, 2, 0); gridPane.add(lbLastName, 0, 1);
+       // gridPane.add(tfLastName, 1, 1); gridPane.add(lbCity, 0, 2);
+        gridPane.add(lbCity, 0, 2); gridPane.add(tfCity, 1, 2);
+        gridPane.add(lbProvince, 3, 2); gridPane.add(tfProvince, 4, 2);
+        gridPane.add(lbpCode, 5, 2); gridPane.add(tfpCode, 6, 2);
+       // gridPane.add(lbNotes, 0, 4); gridPane.add(taNotes, 1, 4);
+         
+        return gridPane;
+    }
+     
+    public static void main(String[] args)
+    {   Application.launch(args);   }
+}

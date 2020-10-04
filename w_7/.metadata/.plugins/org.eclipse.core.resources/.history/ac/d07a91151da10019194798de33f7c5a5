@@ -1,0 +1,47 @@
+package task_2;
+
+import java.util.Scanner;
+
+public class Garbage {
+	static String[][] pattern = new String[6][7];
+	static GameMethods game = new GameMethods();
+	
+	
+	 @SuppressWarnings("static-access")
+	 
+	public static void main (String[] args)
+	  {
+		 Scanner input = new Scanner (System.in);
+		   boolean turn = true; 
+		    int counter = 0; 
+		    String color;
+		    int position;
+		    
+		    while(turn) 
+		    {
+		    	
+		    	game.drawGame(pattern);
+		    	System.out.println("_______________");
+		    	
+		    	if (counter % 2 == 0) {
+		    		System.out.print("Drop a Yellow disk at column (0–6): ");
+		    		color = "Y";
+		    	}else {
+		    		System.out.print("Drop a Red disk at column (0–6): ");
+		    		color = "R";
+		    	}
+		    	counter++;
+		    	
+		    	position = input.nextInt();
+		    	game.pushLetter(position, color, pattern);
+		    	
+		    	
+		    	//pattern[1][position] = "Y";
+		
+		
+		    }
+		
+		 
+
+	  }
+}

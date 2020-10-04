@@ -1,0 +1,108 @@
+package client;
+
+import javafx.application.Application;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class Client extends Application {
+	
+	private DataOutputStream output;
+	private DataInputStream input;
+	String serverMessage = "";
+	TextArea ta = new TextArea();
+
+	@Override 
+	public void start(Stage primaryStage) {
+
+		BorderPane paneForTextField = new BorderPane();
+		Button btnSend = new Button("|>");
+		paneForTextField.setPadding(new Insets(5, 5, 5, 5));
+		paneForTextField.setStyle("-fx-border-color: green");
+		paneForTextField.setRight(btnSend);
+
+		TextField tf = new TextField();
+		tf.setAlignment(Pos.BOTTOM_RIGHT);
+		paneForTextField.setCenter(tf);
+
+		BorderPane mainPane = new BorderPane();
+
+
+		mainPane.setTop(new ScrollPane(ta));
+		mainPane.setCenter(paneForTextField);
+
+		Scene scene = new Scene(mainPane, 450, 270);
+		primaryStage.setTitle("Client");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		btnSend.setOnAction(e -> {
+
+			Platform.runLater(() -> {
+				try {
+
+					output.writeUTF(tf.getText());
+					output.flush();
+					showMessage("client: " + tf.getText() + "\n");
+
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			});
+		});
+
+		try {
+
+			Socket socket = new Socket("localhost", 4000);
+
+			input = new DataInputStream(socket.getInputStream());
+			output = new DataOutputStream(socket.getOutputStream());
+
+			new Thread(() -> {
+				try {
+					while (true) {
+						serverMessage = input.readUTF();
+
+						System.out.println(serverMessage);
+
+						Platform.runLater(() -> {
+
+							ta.appendText(serverMessage);
+
+						});
+
+					}
+				} catch (IOException e) {
+					ta.appendText(e.toString() + "\n");
+				}
+
+			}).start();
+		} catch (IOException ex) {
+			ta.appendText(ex.toString() + '\n');
+		}
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	public void showMessage(String message) {
+
+		Platform.runLater(() -> {
+			ta.appendText(message);
+
+		});
+	}
+
+}

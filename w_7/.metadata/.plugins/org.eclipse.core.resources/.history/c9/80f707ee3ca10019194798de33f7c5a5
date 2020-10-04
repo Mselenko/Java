@@ -1,0 +1,166 @@
+package task_2;
+
+import java.util.Scanner;
+
+
+public class TesterClass
+{
+ 
+	//GameMethods game = new GameMethods();
+	
+	//game.drawGame();
+  public static String[][] drawPattern()
+  {
+     String[][] pattern = new String[7][15]; 
+     
+    for (int i =0;i<pattern.length;i++)
+    {
+        //Creation of the columns for each row
+       for (int j =0;j<pattern[i].length;j++)
+      {
+        if (j% 2 == 0) pattern[i][j] ="|"; // even columns have | symbol , odd columns have " "
+        else pattern[i][j] = " ";
+                
+        if (i==6) pattern[i][j]= "-"; // last row that contains only horizontal line
+      }
+      
+    }
+    return pattern;
+  }
+
+  public static void displayPattern(String[][] pattern)
+  {
+    for (int i =0;i<pattern.length;i++)
+    {
+      for (int j=0;j<pattern[i].length;j++)
+      {
+        System.out.print(pattern[i][j]);
+      }
+      System.out.println();
+    }
+  }
+/************************************************************************************************************/  
+ // Function used to drop red disk to empty column
+  public static void dropRedDisk(String[][] pattern)
+  {
+     System.out.println("Drop a red disk at column (0–6): ");
+    @SuppressWarnings("resource")
+	Scanner input = new Scanner (System.in);
+    
+    int column = 2*input.nextInt()+1; // converting even user columns into the odd user columns to store the disk
+    for (int i =5;i>=0;i--)
+    {
+      if (pattern[i][column] == " ")
+      {
+        pattern[i][column] = "R";
+        break;
+      } 
+    }
+  }
+/************************************************************************************************************/  
+  // Function used to drop a YELLOW DISK
+  public static void dropYellowDisk(String[][] pattern)
+  {
+    System.out.println("Drop a yellow disk at column (0–6): ");
+    @SuppressWarnings("resource")
+	Scanner input = new Scanner (System.in);
+    int column = 2*input.nextInt()+1;// converting even user columns into the odd user columns to store the disk
+    for (int i =5;i>=0;i--)
+    {
+      if (pattern[i][column] == " ")
+      {
+        pattern[i][column] = "Y";
+        break;
+      }
+      
+    }
+  }
+/************************************************************************************************************/  
+// FUNCTION USED TO CHECK THE WINNER OF THE GAME
+  public static String Winner(String[][] pattern)
+  {
+    // checking winner in a horizontal pattern    
+    for (int i =0;i<6;i++)
+    {
+       for (int j=0;j<7;j+=2)
+      {
+        if ((pattern[i][j+1] != " ")&& (pattern[i][j+3] != " ") && (pattern[i][j+5] != " ")&& (pattern[i][j+7] != " ") && ((pattern[i][j+1] == pattern[i][j+3])
+        && (pattern[i][j+3] == pattern[i][j+5])
+        && (pattern[i][j+5] == pattern[i][j+7])))
+
+        return pattern[i][j+1];  // returning the specific color to let players know who won
+      }
+    }
+   // checking winner in a vertical pattern 
+    for (int i=1;i<15;i+=2)
+    {
+      
+      for (int j =0;j<3;j++)
+      {
+            if((pattern[j][i] != " ")&& (pattern[j+1][i] != " ")&& (pattern[j+2][i] != " ")&& (pattern[j+3][i] != " ")&& ((pattern[j][i] == pattern[j+1][i])
+            && (pattern[j+1][i] == pattern[j+2][i])
+            && (pattern[j+2][i] == pattern[j+3][i])))
+              return pattern[j][i];  
+      }  
+    }
+    
+    //checking for left-up to right down diagonal line
+    
+    for (int i=0;i<3;i++)
+    {
+      for (int j=1;j<9;j+=2)
+      {
+            if((pattern[i][j] != " ") && (pattern[i+1][j+2] != " ")&& (pattern[i+2][j+4] != " ")&& (pattern[i+3][j+6] != " ")
+            && ((pattern[i][j] == pattern[i+1][j+2])
+            && (pattern[i+1][j+2] == pattern[i+2][j+4])
+            && (pattern[i+2][j+4] == pattern[i+3][j+6])))
+              return pattern[i][j];  
+      }  
+    }
+    
+   // checking for right up to left down diagonal line
+    for (int i=0;i<3;i++)
+    {
+      for (int j=7;j<15;j+=2)
+      {
+            if((pattern[i][j] != " ")&& (pattern[i+1][j-2] != " ")&& (pattern[i+2][j-4] != " ")&& (pattern[i+3][j-6] != " ")
+            && ((pattern[i][j] == pattern[i+1][j-2])
+            && (pattern[i+1][j-2] == pattern[i+2][j-4])
+            && (pattern[i+2][j-4] == pattern[i+3][j-6])))
+              return pattern[i][j];  
+      }  
+    }
+     return null; // returning null if winner is not found
+  }
+  
+/************************************************************************************************************/  
+  //MAIN FUNCTION OF THE PROGRAM
+//  public static void main (String[] args)
+//  {
+//    String[][] pattern = drawPattern(); //creation of the pattern
+//   
+//    boolean turn = true; // variable used to make game to go on
+//    int counter = 0; // variable used to determine the turn of the players
+//    displayPattern(pattern);
+//    while(turn)
+//    {
+//       if (counter % 2 == 0) dropRedDisk(pattern);
+//       else dropYellowDisk(pattern);
+//       counter++;
+//       displayPattern(pattern);
+//       // checking for the winner in the game
+//       if (Winner(pattern) != null)
+//       {
+//          if (Winner(pattern) == "R")
+//             System.out.println("The red player won.");
+//          else if (Winner(pattern)== "Y")
+//            System.out.println("The yellow player won.");
+//         
+//         turn = false;
+//    }
+//    
+//    }
+  
+//  }
+}
+/************************************************************************************************************/

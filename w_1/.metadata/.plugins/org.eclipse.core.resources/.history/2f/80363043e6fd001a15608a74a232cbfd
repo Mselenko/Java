@@ -1,0 +1,14 @@
+package for_flynn_test;
+
+public class test {
+
+	public static void main(String[] args) {
+		testing();
+
+	}
+	
+	public static void testing() {
+		System.out.print("Hello world");
+	}
+
+}

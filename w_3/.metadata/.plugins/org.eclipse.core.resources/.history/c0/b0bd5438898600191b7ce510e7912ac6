@@ -1,0 +1,75 @@
+package task_2;
+
+import java.util.Scanner;
+
+public class Tester {
+
+
+	  public static void main (String[] args)
+	  {
+	    Scanner input  = new Scanner (System.in);
+	    
+	    System.out.print("Number of banks: ");
+	    int banksNumber = input.nextInt();
+	    
+	    System.out.print("Minimum asset limit: ");
+	    int limit = input.nextInt();
+	    
+	    
+	    double[] banks = new double[banksNumber];
+	    double[][] borrowsers = new double[5][5];
+	  
+	    for (int i =0;i<banks.length;i++)
+	    {
+	      System.out.print("Enter bank balance for bank ID "+ (i+1)+ " ");
+	      banks[i] = input.nextDouble();
+	      
+	      System.out.print("Enter Number of banks Loaned: ");
+	      int loanedNumber = input.nextInt();
+	      
+	      for (int j =0;j<loanedNumber;j++)
+	      {
+	    	System.out.print("Bank ID: ");
+	    	int id = input.nextInt();
+	    	System.out.print("Amount: ");
+	        borrowsers[i][id] = input.nextDouble();
+	      }
+	    }
+	    
+	  for (int j =0;j<banksNumber;j++)
+	  {
+	    for (int k =0; k<banksNumber;k++)
+	    {
+	      int total =0;
+	      //Calculating total number of loans given by k
+	      for (int l =0;l<banksNumber;l++)
+	      {
+	        total +=borrowsers[k][l];
+	      }
+	      if (total + banks[k] < limit)
+	      {
+	        for (int m =0;m<banksNumber;m++)
+	        {
+	          borrowsers[m][k] = 0;
+	        }
+	      }
+	    }
+	  }
+	  
+	  System.out.print("Unsafe banks are ");
+	  for (int k =0; k<banksNumber;k++)
+	  {
+	    int total =0;
+	    //Calculating total number of loans made by k
+	    for (int l =0;l<banksNumber;l++)
+	    {
+	      total +=borrowsers[k][l];
+	    }
+	    if (total + banks[k] < limit)
+	    {
+	      System.out.print(k + " ");
+	    }
+	  }
+	}
+	}
+

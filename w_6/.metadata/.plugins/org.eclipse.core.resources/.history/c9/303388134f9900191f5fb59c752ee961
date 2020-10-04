@@ -1,0 +1,84 @@
+package task_2;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.layout.FlowPane;
+
+public class ButtonMethods {
+	
+	final int FNAME = 32; 
+	final int LNAME = 32; 
+	final int CITY = 20; 
+	final int PROVINCE = 10; 
+	final int POSTAL = 5; 
+	protected int count = 0;
+	NewPanel pane; 
+
+	
+	public ButtonMethods(NewPanel pane) {
+		this.pane =pane;
+	}
+	public void add() {
+		try ( 
+				RandomAccessFile inout = 
+					new RandomAccessFile("AddressBook.dat", "rw");
+			) {
+				inout.seek(inout.length());
+			 	write(inout);
+			}
+			catch (FileNotFoundException ex) {}
+			catch (IOException ex) {}
+			catch (IndexOutOfBoundsException ex) {}
+		}
+		
+	
+	
+	public void first() {
+		System.out.println("Add Button is Clicked");
+		
+	}
+	
+	
+	public void next() {
+		System.out.println("Add Button is Clicked");
+		
+	}
+	
+	
+	public void previous() {
+		System.out.println("Add Button is Clicked");
+		
+	}
+	
+	public void last() {
+		System.out.println("Add Button is Clicked");
+		
+	}
+	
+	public void update() {
+		System.out.println("Add Button is Clicked");
+		
+	}
+	
+	
+	private void write(RandomAccessFile inout) throws IOException {
+		inout.write(fixedLength(pane.firstName.getText().getBytes(), FNAME)); 
+		inout.write(fixedLength(pane.lastName.getText().getBytes(), LNAME)); 
+		inout.write(fixedLength(pane.city.getText().getBytes(), CITY));
+		inout.write(fixedLength(pane.province.getPromptText().getBytes(), PROVINCE));
+		inout.write(fixedLength(pane.postalCode.getText().getBytes(), POSTAL));
+		System.out.println("Address #" + count + " saved!");
+	}
+
+	private byte[] fixedLength(byte[] x, int n) {
+		byte[] b = new byte[n];
+		for (int i = 0; i < x.length; i++) {
+			b[i] = x[i];
+		}
+		return b;
+	}
+}

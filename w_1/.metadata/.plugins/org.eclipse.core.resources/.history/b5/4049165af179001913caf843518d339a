@@ -1,0 +1,49 @@
+package locker;
+
+public class OpenedLockers 
+{
+
+	public static void main(String[] args) 
+	{
+		boolean lockers[]  = new boolean[100];
+		
+		for (int i = 1; i < lockers.length; i++) 
+		{
+            lockers[i] = true;
+        }
+		
+		for (int i = 2; i < lockers.length; i++) 
+		{
+            lockers[i] = false;
+        }
+		
+		int number = 2;
+		
+	for (int j = 2; j < lockers.length; j++) {
+		
+		
+		for (int i = number; i < lockers.length; i++) 
+		{
+			if(i % number == 0) {
+			System.out.print(i+ " ");
+				lockers[i] =!lockers[i];
+			}
+			
+		}
+		System.out.println();
+		number++;
+	}
+	//}
+	
+	//public static void display(boolean lockers[]) 
+	//{
+	System.out.print("Opend lockers: ");
+	for (int i = 1; i < lockers.length; i++)
+	{
+		if (lockers[i] == true)
+			System.out.print(i + " ");
+	}
+		
+	
+}
+}

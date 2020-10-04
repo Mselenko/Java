@@ -1,0 +1,31 @@
+package task_2;
+
+import task_1.MyDate;
+
+public class Employee extends Person 
+{
+
+	String office;
+	long salary;
+	MyDate hiredate;
+	
+	public Employee() 
+	{
+		this("DB201", 37, new MyDate());
+		
+	}
+	
+	public Employee(String office, long salary, MyDate hiredate) 
+	{
+		super();
+		this.office = office;
+		this.salary = salary;
+		this.hiredate = hiredate;
+		
+	}
+	public String toString() 
+	{
+		//this.hiredate.display();
+		return super.toString() + " the office is "+ this.office + " the salary is " + this.salary + " the hire date is "+ this.hiredate.getYear()+ "/" + this.hiredate.getMonth()+"/"+ this.hiredate.getDay();
+	}	
+}

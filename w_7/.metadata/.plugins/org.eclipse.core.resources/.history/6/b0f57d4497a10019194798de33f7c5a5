@@ -1,0 +1,164 @@
+package task_1;
+	
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
+
+public class TesterClass extends Application {
+
+	/**************************************************************************************************************************/	
+	// DECLARING ALL NECCESSARY FIELDS	
+		public Stage MainStage=new Stage();
+		public TextField year=new TextField();
+		public TextField gender=new TextField();
+		public TextField name=new TextField();
+		public TextField result=new TextField();
+		public TextField answer=new TextField();
+		public Button sbmbtn=new Button("Submit Query");
+		public Button exitbtn=new Button("Exit");
+		public Button submit=new Button("Submit");
+	/*************************************************************************************************************************/	
+	    public void start(Stage Main)
+	    {
+	    	GridPane gridPane = new GridPane();
+		    gridPane.setHgap(5);
+		    gridPane.setVgap(5);
+		    gridPane.add(new Label("Enter the year: "), 0, 0);
+		    gridPane.add(year, 1, 0);
+		    gridPane.add(new Label("Enter the Gender: "), 0, 1);
+		    gender.setPrefColumnCount(1);
+		    gridPane.add(gender, 1, 1);
+		    gridPane.add(new Label("Enter the Name: "), 0, 2);
+		    gridPane.add(name, 1, 2);
+		    gridPane.add(sbmbtn, 0,4);
+		    gridPane.add(exitbtn, 1, 4);
+		    exitbtn.setOnAction(e->Exit());
+		    sbmbtn.setOnAction(e->ShowResult());
+		    gridPane.setAlignment(Pos.CENTER);
+		    year.setAlignment(Pos.BOTTOM_RIGHT);
+		    gender.setAlignment(Pos.BOTTOM_RIGHT);
+		    name.setAlignment(Pos.BOTTOM_RIGHT);
+		    GridPane.setHalignment(exitbtn, HPos.RIGHT);
+		    GridPane.setHalignment(sbmbtn, HPos.LEFT);
+		    Scene scene=new Scene(gridPane,400,500);
+		    MainStage.setTitle("Search Name Ranking Application");
+		    MainStage.setScene(scene);
+	        MainStage.show();    	
+	    }
+	/*************************************************************************************************************************/
+	// EXIT FUNCTION Implementation, used to exit from the program
+	 public void Exit()
+	 {
+		 System.exit(1);
+	 }
+	/*************************************************************************************************************************/
+	 // ShowResult function used to show the result of the submitted query
+	 public void ShowResult()
+	 {
+		 
+		 int yr=Integer.parseInt(year.getText());
+		 String sex=gender.getText();
+		 String fname=name.getText();
+		
+		/***********************************************************************************************************/ 
+		// IMPLEMENTING THE FUNCTIONALITY OF THE PROGRAM
+	     result.setText("");
+	     File file = new File("babynamesranking" + yr + ".txt");
+	     if (!file.exists()) {
+	         result.setText("No record for " + yr);  
+	     }
+	     
+	     @SuppressWarnings("unused")
+		int name_ranking = 0;
+	     try {
+	         @SuppressWarnings("resource")
+			Scanner read = new Scanner(file);
+	         while (read.hasNext()) {
+	             String s = read.nextLine();
+	             String[] str = s.split(" ");
+	            
+	             if (sex.equalsIgnoreCase("M") && str[1].contains(fname))
+	              {name_ranking = new Integer(str[0]);
+	              break;
+	              }
+	             if (sex.equalsIgnoreCase("F")&&str[2].contains(fname))
+	             { name_ranking = new Integer(str[0]);
+	              break;            
+	             }
+	         }
+	     } catch (FileNotFoundException e) {}
+	     
+	     if (name_ranking == 0) {
+	         result.setText("The name "+fname+" is not ranked in " + yr+" year");
+	     } else if(name_ranking>0&&sex.equalsIgnoreCase("M")){
+
+	         result.setText("Boy name "+fname+" is ranked #"+name_ranking+" in "+yr+" year");
+	     }
+	     else if(name_ranking>0&&sex.equalsIgnoreCase("F"))
+	     {
+	    	 result.setText("Girl name "+fname+" is ranked #"+name_ranking+" in "+yr+" year");
+	     }
+	     
+	 /*********************************************************************************************************/ 
+		//DESIGN OF THE PROGRAM 
+	        answer.setText("");
+		    GridPane gridPane1 = new GridPane();
+		    gridPane1.setHgap(5);
+		    gridPane1.setVgap(5);
+		    gridPane1.add(new Label("Result of the Query: "), 0, 0);
+		    
+		    gridPane1.add(result, 1, 0);
+		    gridPane1.add(new Label("Do you want to Search for another Name (Y/N): "), 0, 1);
+		    answer.setPrefColumnCount(1);
+		    gridPane1.add(answer, 1, 1);
+		    gridPane1.add(submit, 0,4);
+		    gridPane1.add(exitbtn, 1, 4);
+		    exitbtn.setOnAction(e->Exit());
+		    submit.setOnAction(e->Option());
+		    gridPane1.setAlignment(Pos.CENTER);
+		  
+		    GridPane.setHalignment(exitbtn, HPos.RIGHT);
+		    GridPane.setHalignment(submit, HPos.LEFT);
+		    Scene scene1=new Scene(gridPane1,600,300);
+		    MainStage.setTitle("Search Name Ranking Application");
+		    MainStage.setScene(scene1);
+	        MainStage.show();          
+	 }
+	 
+	/*************************************************************************************************************************/
+	//Option FUNCTION implementation used to check , whether user wants to enter another name or not
+	  public void Option()
+	  {
+		  String option=answer.getText();
+		  if(option.equals("Y")||option.equals("y"))
+		  {
+			  year.setText("");
+			  gender.setText("");
+			  name.setText("");
+			  start(MainStage);
+		  }
+		  else
+		  {
+			  Exit();
+		  }
+	  }
+	/*************************************************************************************************************************/    
+	//MAIN FUNCTION
+	    public static void main(String[]args)
+		{
+			launch(args);
+		}
+	/**************************************************************************************************************************/    
+	}

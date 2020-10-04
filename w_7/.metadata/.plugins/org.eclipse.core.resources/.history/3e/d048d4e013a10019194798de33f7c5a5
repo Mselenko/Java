@@ -1,0 +1,13 @@
+package task_2;
+
+public class Garbage {
+
+	
+	 public static void main (String[] args)
+	  {
+		 static String[][] pattern = new String[6][7];
+		 
+
+		
+	  }
+}

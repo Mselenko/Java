@@ -1,0 +1,13 @@
+package task_2;
+
+public class Garbage {
+	static String[][] pattern = new String[6][7];
+	static GameMethods game = new GameMethods();
+	
+	 public static void main (String[] args)
+	  {
+		game.drawGame(pattern);
+		 
+
+	  }
+}

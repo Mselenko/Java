@@ -1,0 +1,112 @@
+package task_2;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+
+class NewPanel extends BorderPane {
+
+	FlowPane flowPane = new FlowPane(5, 5);
+	HBox ButtonPanel = new HBox(5);
+
+	TextField firstName = new TextField();
+	TextField lastName = new TextField();
+	TextField city = new TextField();
+	ComboBox<String> province = new ComboBox<String>();
+	TextField postalCode = new TextField();
+	
+	
+	public NewPanel() throws FileNotFoundException {
+		
+
+		firstName.setPrefColumnCount(40);
+		lastName.setPrefColumnCount(40);
+		city.setPrefColumnCount(11);
+		province.getItems().addAll("AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT");
+		postalCode.setPrefColumnCount(11);
+
+		flowPane.setPadding(new Insets(5));
+		flowPane.setVgap(30);
+		flowPane.getChildren().addAll(new Label("First Name: "), firstName, new Label("Last Name: "), lastName,
+				new Label("City: "), city, new Label("Province: "), province, new Label(" Postal Code: "), postalCode);
+
+		
+		
+		ButtonMethods method = new ButtonMethods(this);
+		
+		Button buttons[] = new Button[6];
+
+		buttons[0] = new Button("Add");
+		buttons[0].setOnAction(e -> {
+			try {
+				method.add();
+			} catch (IOException e4) {
+				// TODO Auto-generated catch block
+				e4.printStackTrace();
+			}
+		});
+		buttons[1] = new Button("First");
+		buttons[1].setOnAction(e -> {
+			try {
+				method.first();
+			} catch (IOException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+		});
+		buttons[2] = new Button("Next");
+		buttons[2].setOnAction(e -> {
+			try {
+				method.next();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		});
+		buttons[3] = new Button("Previous");
+		buttons[3].setOnAction(e -> {
+			try {
+				method.previous();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		buttons[4] = new Button("Last");
+		buttons[4].setOnAction(e -> {
+			try {
+				method.last();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		buttons[5] = new Button("Update");
+		buttons[5].setOnAction(e -> {
+			try {
+				method.update();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setPrefWidth(120);
+			ButtonPanel.getChildren().add(buttons[i]);
+		}
+
+		setCenter(flowPane);
+		setBottom(ButtonPanel);
+
+}
+}
+	

@@ -1,0 +1,34 @@
+package task_1;
+
+public class ThreadMethods implements Runnable {
+	
+	private int value;
+	private Thread thrd;
+
+	ThreadMethods(int value){
+		this.value =value;
+	}
+	
+	
+	@Override
+	public void run() 
+	{
+		for(int i=0;i<1000;i++)
+		{
+			for(int j=0;j<1000;j++)
+			{
+			//	result[i][j]=a[i][j]+b[i][j];
+			}
+		}
+		
+		
+	}
+	
+	public void start() {
+		if(thrd == null) {
+			thrd = new Thread();
+			thrd.start();
+		}
+	}
+
+}

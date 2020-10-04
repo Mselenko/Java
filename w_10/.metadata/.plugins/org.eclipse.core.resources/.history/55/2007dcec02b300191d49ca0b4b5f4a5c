@@ -1,0 +1,142 @@
+package server;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.NoSuchElementException;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class Server extends Application {
+
+	private ServerSocket serverSocket;
+
+	TextArea ta = new TextArea();
+	String message;
+	private ArrayList<NewClient> clients = new ArrayList<>();
+
+	@Override 
+	public void start(Stage primaryStage) {
+
+		
+		//BorderPane borderPaneForText = new BorderPane();
+
+
+		ta.setEditable(false);
+		ta.appendText("MultiThreadServer started at " + new Date() + '\n');
+
+		//borderPaneForText.setPadding(new Insets(5, 5, 5, 5));
+
+//		BorderPane mainPane = new BorderPane();
+//		mainPane.setTop(new ScrollPane(ta));
+//		mainPane.setCenter(borderPaneForText);
+
+		ScrollPane mainPane = new ScrollPane(ta); 
+		
+		Scene scene = new Scene(mainPane, 500, 300);
+		primaryStage.setTitle("Multi-threaded Server"); 
+		primaryStage.setScene(scene); // Place the scene in the stage
+		primaryStage.show(); // Display the stage
+
+
+		new Thread(() -> {
+			try {
+
+				serverSocket = new ServerSocket(5000);
+
+				while (true) 
+				{
+					Socket socket = serverSocket.accept();
+					String clientName = "Client" + (clients.size() + 1);
+					
+					NewClient newClient = new NewClient(clientName, socket);
+					clients.add(newClient);
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
+	}
+	
+	
+	public void broadcastMessage(String fromClientName, String message) throws IOException
+	{
+		
+		for (NewClient newClient : clients) 
+		{
+			newClient.output.writeUTF(fromClientName + " says: " + message);
+			newClient.output.flush();
+		}
+		
+		
+		Platform.runLater(() -> {
+			ta.appendText(fromClientName + " says: " + message);
+		});
+
+		System.out.println(fromClientName + " says: " + message);
+	}
+
+	class NewClient implements Runnable {
+		private Socket socket;
+		private DataInputStream input;
+		private DataOutputStream output;
+		private String name = "";
+		
+		public NewClient(String name, Socket socket) 
+		{
+			this.socket = socket;
+			this.name = name;
+			
+			Thread thread = new Thread(this);
+			thread.start();
+		}
+
+
+		public void run() {
+
+			try {
+				input = new DataInputStream(socket.getInputStream());
+				output = new DataOutputStream(socket.getOutputStream());
+				
+				ta.appendText("Connection from Socket" + name + " at " + new Date() + "\n");
+
+				while (true) {
+
+					message = input.readUTF();
+
+					broadcastMessage(name, message);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (NoSuchElementException e) {
+			}
+		}
+
+
+	}
+
+	public static void main(String[] args) {
+		launch(args);      
+	}
+
+	public void showMessage(String message) {
+
+		Platform.runLater(() -> {
+			ta.appendText(message);
+
+		});
+	}
+
+}

@@ -1,0 +1,16 @@
+package for_flynn_test;
+
+public class main {
+	public static void main(String args[]) {
+		String sentence = "Codility We test coders";
+		int k = 14;
+	}
+	
+	public static String solution(String message, int k) {
+		String croppedMessage = message.substring(0, k);
+		
+		System.out.println(croppedMessage);
+		
+		return croppedMessage;
+	}
+}

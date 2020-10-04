@@ -1,0 +1,98 @@
+package task_2;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.control.ComboBox;
+
+
+public class AddressBook extends Application {
+
+	// AddressPanel class
+	//*************************************************************************
+	class AddressPanel extends BorderPane {
+	
+		//defining all necessary Textfields and buttons
+		TextField FirstName = new TextField();
+		TextField LastName = new TextField(); 
+		TextField City = new TextField(); 
+		ComboBox<String>  Province = new ComboBox(); 
+		TextField Postal_Code = new TextField(); 
+		TextField Result=new TextField();
+		Button addBtn = new Button("Add");
+		Button firstBtn = new Button("First");
+		Button nextBtn = new Button("Next");
+		Button previousBtn = new Button("Previous");
+		Button lastBtn = new Button("Last");
+		Button updateBtn = new Button("Update");
+		FlowPane InfoPanel = new FlowPane(5, 5);
+		HBox ButtonPanel = new HBox(5);
+
+	// default constructor to set up all form fields
+	//**********************************************************************
+	public AddressPanel() {
+		// set the length of the fields
+		FirstName.setPrefColumnCount(40);
+		LastName.setPrefColumnCount(40);
+		City.setPrefColumnCount(11);
+		Province.getItems().add("Ontario");
+		Postal_Code.setPrefColumnCount(10);
+		
+		// add the textfields and buttons to the FlowPane
+		InfoPanel.setPadding(new Insets(5));
+		InfoPanel.setVgap(15);
+		InfoPanel.getChildren().addAll(
+									new Label("First Name: "), FirstName, 
+									new Label("Last Name: "), LastName, 
+									new Label("City: "), City, 
+									new Label("Province: "), Province, 
+									new Label(" Postal Code: "), Postal_Code);
+            
+		// set the width of the buttons
+		addBtn.setPrefWidth(100);
+		firstBtn.setPrefWidth(100);
+		nextBtn.setPrefWidth(100);
+		previousBtn.setPrefWidth(100);
+		lastBtn.setPrefWidth(100);
+		updateBtn.setPrefWidth(100);
+				
+		
+		// add buttons to the HBox - horizontal button, and adjust alignment position to center
+		ButtonPanel.getChildren().addAll(addBtn, firstBtn,nextBtn,previousBtn, lastBtn, updateBtn);
+		ButtonPanel.setAlignment(Pos.CENTER);
+		
+        // adjust the alignments, set FlowPane to the center and buttons HBox at the bottom
+		setCenter(InfoPanel);
+		setBottom(ButtonPanel);
+		
+	}
+}	
+	
+	AddressPanel panel = new AddressPanel();
+		
+	public void start(Stage MainStage) {
+			
+		Scene scene = new Scene(panel, 630, 300);
+		MainStage.setTitle("Address Book"); 
+		MainStage.setScene(scene); 
+		MainStage.show(); 
+	}
+
+	// main method
+	//**************************************************************
+	public static void main(String [] args) {
+		launch(args);
+	}
+
+	// end scope of the TesterClass 
+}
+
+

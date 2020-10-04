@@ -1,0 +1,92 @@
+package task_1;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Date;
+
+public class Account implements Serializable{
+
+	private int id;
+	private String firstName;
+	private String lastName;
+	private double balance;
+	private double annualInterestRate;
+	Date dateCreated;
+	private int pin;
+	
+	Account()
+	{
+		this.id =0;
+		this.firstName ="";
+		this.lastName= "";
+		this.balance =0;
+		this.annualInterestRate=0;
+		this.dateCreated = new Date();
+		this.pin = 0;
+	}
+	Account(int id, double balance){
+		this();
+		this.id = id;
+		this.balance = balance;	
+	}
+	
+	
+public int getPin() {
+	return this.pin;
+}
+	
+	public void setlastName(String lastName) {
+		this.lastName=lastName;
+	}
+	
+	public void setfirstName(String firstName) {
+		this.firstName=firstName;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public double getBalance() {
+		return this.balance;
+	}
+	
+	public double getannualInterestRate() {
+		return this.annualInterestRate;
+	}
+	
+	public String getDate() {
+		return this.dateCreated.toString();
+	}
+	
+	public void setId(int id) {
+		this.id=id;
+	}
+	
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
+	public void getannualInterestRate(double annualInterestRate) {
+		this.annualInterestRate = annualInterestRate;
+	}
+	
+	public double getMonthlyInterestRate() {
+        return (annualInterestRate / 100) / 12 ;
+    }
+
+    public double getMonthlyInterest() {
+        return balance * getMonthlyInterestRate();
+    }
+
+    public void withdraw(double amount) {
+        this.balance -= amount;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+	
+}

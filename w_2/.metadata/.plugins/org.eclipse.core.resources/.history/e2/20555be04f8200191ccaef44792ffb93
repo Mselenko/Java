@@ -1,0 +1,19 @@
+package task_2;
+
+public class Faculty extends Employee
+{
+private String hours, rank;
+	
+	public Faculty(String house, String rank) 
+	{
+		super();
+		this.hours = hours;
+		this.rank = rank;
+	}
+	
+	public String toString() 
+	{
+		return super.toString();
+	}
+
+}

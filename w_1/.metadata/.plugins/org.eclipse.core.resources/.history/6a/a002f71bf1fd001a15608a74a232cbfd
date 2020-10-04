@@ -1,0 +1,24 @@
+package for_flynn_test;
+
+public class main {
+	public static void main(String args[]) {
+		String sentence = "Codility We test coders";
+		int k = 14;
+		
+		solution(sentence, k);
+	}
+	
+	public static String solution(String message, int k) {
+		String croppedMessage = "";
+		char characters[] = message.toCharArray();
+		char newArray[] = new char[15];
+		 
+		for(int i = 0; i < 14; i++) {
+			newArray[i] = characters[i];
+		
+		}
+		System.out.println(new String(newArray));
+		
+		return croppedMessage;
+	}
+}

@@ -1,0 +1,76 @@
+package task_1;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
+public class MyDate {
+	
+	GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance(TimeZone.getTimeZone("Canada/Eastern"));
+	
+	private int year,month,day;
+	
+	
+	MyDate()
+	{	
+		
+		this.year = (gc.get(Calendar.YEAR))+1;
+		this.month = gc.get(Calendar.MONTH);
+		this.day = gc.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	MyDate(long elapsedTime)
+	{
+		
+	}
+	
+	MyDate(int year, int month, int day)
+	{
+		this.year =year;
+		this.month = month;
+		this.day = day;
+	}
+	
+	
+	public long getYear() 
+	{
+		return this.year;
+	}
+	
+	public long getMonth() 
+	{
+		return this.month;
+	}
+	public long getDay() 
+	{
+		return this.day;
+	}
+	
+	public void setDate(long elapsedTime) 
+	{
+		
+	}
+	
+	public void display()
+	{
+		System.out.print("The year is " + this.year + " the month is " + this.month + " the day is " + this.day);
+	}
+	
+	
+
+}
+
+
+class Main{
+public static void main(String[] args) 
+{ 
+MyDate date1 = new MyDate();
+//MyDate date2 = new MyDate(34355555133101L);
+
+
+date1.display();
+//date2.display();
+		
+
+	}
+}
