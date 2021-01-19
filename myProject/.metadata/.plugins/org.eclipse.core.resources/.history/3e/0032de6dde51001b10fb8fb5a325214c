@@ -1,0 +1,12 @@
+package com.semanticsquare.thrillio.managers;
+
+public class BookmarkManager {
+
+	private BookmarkManager() {}
+	
+	private static BookmarkManager instance = new BookmarkManager();
+	
+	public static BookmarkManager getInstance() {
+		return instance;
+	}
+}

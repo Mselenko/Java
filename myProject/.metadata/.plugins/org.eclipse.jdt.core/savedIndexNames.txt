@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\rita\Desktop\Seneca\JAC\myProject\.metadata\.plugins\org.eclipse.jdt.core
+3886942040.index
+2247071607.index

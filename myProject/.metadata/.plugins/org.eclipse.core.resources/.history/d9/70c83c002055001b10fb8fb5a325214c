@@ -1,0 +1,25 @@
+package com.semanticsquare.thrillio.dao;
+
+import java.util.List;
+
+import com.semanticsquare.thrillio.DataStore;
+import com.semanticsquare.thrillio.entities.Bookmark;
+import com.semanticsquare.thrillio.entities.UserBookmark;
+import com.semanticsquare.thrillio.entities.Weblink;
+
+public class BookmarkDao {
+
+	public List<List<Bookmark>> getBookmarks() {
+		return DataStore.getBookmarks();
+		
+	}
+
+	public void saveUserBokmark(UserBookmark userBookmark) {
+		DataStore.add(userBookmark);
+		
+	}
+	
+	public List<Weblink> getWeblinks(WebLink.DownloadStatus downloadStatus){
+		
+	}
+}

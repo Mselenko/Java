@@ -1,0 +1,21 @@
+package com.semanticsquare.thrillio.controllers;
+
+import com.semanticsquare.thrillio.entities.Bookmark;
+import com.semanticsquare.thrillio.entities.User;
+
+public class BookmarkController {
+	
+	private static BookmarkController instance = new BookmarkController();
+	
+	private BookmarkController() {}
+	
+	public static BookmarkController getInstance() {
+		return instance;
+	}
+
+	public void saveUserBokkmark(User user, Bookmark bookmark) {
+		
+		
+	}
+	
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.Movie"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.Book"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.DataStore"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.dao.UserDao"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.managers.UserManager"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.User"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.Bookmark"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.controllers.BookmarkController"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.managers.BookmarkManager"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.UserBookmark"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.constants.MovieGenre"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.constants.UserType"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.constants.KidFriendlyStatus"/>
+<fullyQualifiedTypeName name="org.apache.commons.lang3.StringUtils"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.partner.Shareable"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.constants.BookGenre"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.constants.Gender"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.dao.BookmarkDao"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Executors"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ExecutorService"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.Weblink"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Callable"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.util.HttpConnect"/>
+<fullyQualifiedTypeName name="java.net.MalformedURLException"/>
+<fullyQualifiedTypeName name="java.net.URISyntaxException"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.entities.Weblink.DownloadStatus"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Future"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ExecutionException"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.util.IOUtil"/>
+<fullyQualifiedTypeName name="com.semanticsquare.thrillio.bigjobs.WebPageDownloaderTask"/>
+</qualifiedTypeNameHistroy>
